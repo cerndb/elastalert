@@ -1769,11 +1769,6 @@ class ServiceNowAlerter(Alerter):
         'servicenow_rest_url',
         'short_description',
         'comments',
-        'assignment_group',
-        'category',
-        'subcategory',
-        'cmdb_ci',
-        'caller_id'
     ])
 
     def __init__(self, rule):
@@ -1800,7 +1795,9 @@ class ServiceNowAlerter(Alerter):
             "category": self.rule['category'],
             "subcategory": self.rule['subcategory'],
             "cmdb_ci": self.rule['cmdb_ci'],
-            "caller_id": self.rule["caller_id"]
+            "caller_id": self.rule["caller_id"],
+            "u_business_service": self.rule["u_business_service"],
+            "u_functional_element": self.rule["u_functional_element"]
         }
         try:
             response = requests.post(

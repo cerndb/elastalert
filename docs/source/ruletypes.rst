@@ -1906,6 +1906,14 @@ The alerter requires the following options:
 
 ``short_description``: The ServiceNow password to access the api.
 
+Optional:
+
+``servicenow_proxy``: By default ElastAlert will not use a network proxy to send notifications to ServiceNow. Set this option using ``hostname:port`` if you need to use a proxy.
+
+``Service Element (u_business_service)``: This is the 32-character long ID of the Service Element that will take care of theincident.
+
+``Functional Element (u_functional_element)``: The 32-character long ID of the FE that will take care of the incident.
+
 ``comments``: Comments to be attached to the incident, this is the equivilant of work notes.
 
 ``assignment_group``: The group to assign the incident to.
@@ -1917,12 +1925,6 @@ The alerter requires the following options:
 ``cmdb_ci``: The configuration item to attach the incident to.
 
 ``caller_id``: The caller id (email address) of the user that created the incident (elastalert@somewhere.com).
-
-
-Optional:
-
-``servicenow_proxy``: By default ElastAlert will not use a network proxy to send notifications to ServiceNow. Set this option using ``hostname:port`` if you need to use a proxy.
-
 
 Debug
 ~~~~~

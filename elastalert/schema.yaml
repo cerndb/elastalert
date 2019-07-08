@@ -336,6 +336,9 @@ properties:
   alerta_attributes_values: {type: array, items: {type: string}}  # Python format string
   alerta_new_style_string_format: {type: boolean}
 
+  ### ServiceNow
+  u_functional_element: {type: string}
+  u_business_service: {type: string}
 
   ### Simple
   simple_webhook_url: *arrayOfString
