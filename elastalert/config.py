@@ -33,6 +33,7 @@ rule_schema = jsonschema.Draft4Validator(yaml.load(open(os.path.join(os.path.dir
 # Required global (config.yaml) and local (rule.yaml)  configuration options
 required_globals = frozenset(['run_every', 'rules_folder', 'es_host', 'es_port', 'writeback_index', 'buffer_time'])
 required_locals = frozenset(['alert', 'type', 'name', 'index'])
+required_credentials = frozenset(['snow_username', 'snow_password'])
 
 # Settings that can be derived from ENV variables
 env_settings = {'ES_USE_SSL': 'use_ssl',
@@ -210,6 +211,18 @@ def load_options(rule, conf, filename, args=None):
             rule['kibana4_end_timedelta'] = datetime.timedelta(**rule['kibana4_end_timedelta'])
     except (KeyError, TypeError) as e:
         raise EAException('Invalid time format used: %s' % (e))
+
+    # Copy required_credentials from config.yaml
+    try:
+        for key in required_credentials:
+                if key not in rule:
+                    rule.update({key: conf[key]})
+    except:
+        missing_credentials = []
+        for key in required_credentials:
+            if key not in conf:
+                missing_credentials.append(key)
+        raise EAException('Missing required credentials: %s' % (missing_credentials))
 
     # Set defaults, copy defaults from config.yaml
     td_fields = ['realert', 'exponential_realert', 'aggregation', 'query_delay']
