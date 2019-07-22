@@ -1900,11 +1900,11 @@ The alerter requires the following options:
 
 ``servicenow_rest_url``: The ServiceNow RestApi url, this will look like https://instancename.service-now.com/api/now/v1/table/incident
 
-``snow_username``: The ServiceNow Username to access the api.
+``snow_username``: The ServiceNow Username to access the api. This option allows the rule to override the buffer_time global setting defined in config.yaml.
 
-``snow_password``: The ServiceNow password to access the api.
+``snow_password``: The ServiceNow password to access the api. This option allows the rule to override the buffer_time global setting defined in config.yaml.
 
-``short_description``: The ServiceNow password to access the api.
+``short_description``: The ServiceNow password to access the api. This option allows the rule to override the buffer_time global setting defined in config.yaml.
 
 Optional:
 
