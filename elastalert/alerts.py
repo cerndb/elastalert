@@ -1766,8 +1766,7 @@ class ServiceNowAlerter(Alerter):
     required_options = set([
         'snow_username',
         'snow_password',
-        'servicenow_rest_url',
-        'short_description'
+        'servicenow_rest_url'
     ])
 
     def __init__(self, rule):
@@ -1789,7 +1788,14 @@ class ServiceNowAlerter(Alerter):
 
         key_list = ["caller_id", "comments", "assignment_group", "category", "subcategory", "cmdb_ci", "comments", "u_business_service", "u_functional_element"]
 
-        payload = {"description": description}
+        payload = {'description': description}
+
+        if 'short_description' in self.rule:
+            payload.update({'short_description': self.rule['short_description']})
+        elif 'alert_subject' not in self.rule:
+            payload.update({'short_description': self.create_default_title(self, matches)})
+        else:
+            payload.update({'short_description': self.create_title(matches)})
 
         for key in key_list:
             if (self.rule.get(key)):

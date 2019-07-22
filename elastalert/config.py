@@ -33,7 +33,7 @@ rule_schema = jsonschema.Draft4Validator(yaml.load(open(os.path.join(os.path.dir
 # Required global (config.yaml) and local (rule.yaml)  configuration options
 required_globals = frozenset(['run_every', 'rules_folder', 'es_host', 'es_port', 'writeback_index', 'buffer_time'])
 required_locals = frozenset(['alert', 'type', 'name', 'index'])
-required_credentials = frozenset(['snow_username', 'snow_password'])
+required_credentials = frozenset(['snow_username', 'snow_password', 'servicenow_rest_url'])
 
 # Settings that can be derived from ENV variables
 env_settings = {'ES_USE_SSL': 'use_ssl',
