@@ -217,9 +217,12 @@ def load_options(rule, conf, filename, args=None):
         for key in required_credentials:
                 if key not in rule:
                     rule.update({key: conf[key]})
-    except (KeyError, TypeError) as e:
-        raise EAException('Missing required credentials: %s' % (e))
-
+    except:
+        missing_credentials = []
+        for key in required_credentials:
+            if key not in conf:
+                missing_credentials.append(key)
+        raise EAException('Missing required credentials: %s' % (missing_credentials))
 
     # Set defaults, copy defaults from config.yaml
     td_fields = ['realert', 'exponential_realert', 'aggregation', 'query_delay']
