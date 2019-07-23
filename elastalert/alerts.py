@@ -1789,7 +1789,7 @@ class ServiceNowAlerter(Alerter):
 
         key_list = ["caller_id", "comments", "assignment_group", "category", "subcategory", "cmdb_ci", "comments", "u_business_service", "u_functional_element"]
 
-        payload = {"description": description}
+        payload = {"description": description, "short_description": self.rule['short_description']}
 
         for key in key_list:
             if (self.rule.get(key)):
