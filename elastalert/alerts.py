@@ -1764,16 +1764,10 @@ class GitterAlerter(Alerter):
 class ServiceNowAlerter(Alerter):
     """ Creates a ServiceNow alert """
     required_options = set([
-        'username',
-        'password',
+        'snow_username',
+        'snow_password',
         'servicenow_rest_url',
-        'short_description',
-        'comments',
-        'assignment_group',
-        'category',
-        'subcategory',
-        'cmdb_ci',
-        'caller_id'
+        'short_description'
     ])
 
     def __init__(self, rule):
@@ -1792,20 +1786,19 @@ class ServiceNowAlerter(Alerter):
             "Accept": "application/json;charset=utf-8"
         }
         proxies = {'https': self.servicenow_proxy} if self.servicenow_proxy else None
-        payload = {
-            "description": description,
-            "short_description": self.rule['short_description'],
-            "comments": self.rule['comments'],
-            "assignment_group": self.rule['assignment_group'],
-            "category": self.rule['category'],
-            "subcategory": self.rule['subcategory'],
-            "cmdb_ci": self.rule['cmdb_ci'],
-            "caller_id": self.rule["caller_id"]
-        }
+
+        key_list = ["caller_id", "comments", "assignment_group", "category", "subcategory", "cmdb_ci", "comments", "u_business_service", "u_functional_element"]
+
+        payload = {"description": description, "short_description": self.rule['short_description']}
+
+        for key in key_list:
+            if (self.rule.get(key)):
+                payload.update({key: self.rule[key]})
+
         try:
             response = requests.post(
                 self.servicenow_rest_url,
-                auth=(self.rule['username'], self.rule['password']),
+                auth=(self.rule['snow_username'], self.rule['snow_password']),
                 headers=headers,
                 data=json.dumps(payload, cls=DateTimeEncoder),
                 proxies=proxies

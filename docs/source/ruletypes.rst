@@ -1900,15 +1900,21 @@ The alerter requires the following options:
 
 ``servicenow_rest_url``: The ServiceNow RestApi url, this will look like https://instancename.service-now.com/api/now/v1/table/incident
 
-``username``: The ServiceNow Username to access the api.
+``snow_username``: The ServiceNow Username to access the api. This option allows the rule to override the buffer_time global setting defined in config.yaml.
 
-``password``: The ServiceNow password to access the api.
+``snow_password``: The ServiceNow password to access the api. This option allows the rule to override the buffer_time global setting defined in config.yaml.
 
-``short_description``: The ServiceNow password to access the api.
+``short_description``: The ServiceNow password to access the api. This option allows the rule to override the buffer_time global setting defined in config.yaml.
+
+Optional:
 
 ``comments``: Comments to be attached to the incident, this is the equivilant of work notes.
 
 ``assignment_group``: The group to assign the incident to.
+
+``Service Element (u_business_service)``: This is the 32-character long ID of the Service Element that will take care of theincident.
+
+``Functional Element (u_functional_element)``: The 32-character long ID of the FE that will take care of the incident.
 
 ``category``: The category to attach the incident to, use an existing category.
 
@@ -1917,9 +1923,6 @@ The alerter requires the following options:
 ``cmdb_ci``: The configuration item to attach the incident to.
 
 ``caller_id``: The caller id (email address) of the user that created the incident (elastalert@somewhere.com).
-
-
-Optional:
 
 ``servicenow_proxy``: By default ElastAlert will not use a network proxy to send notifications to ServiceNow. Set this option using ``hostname:port`` if you need to use a proxy.
 
