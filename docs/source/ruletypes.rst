@@ -1904,9 +1904,9 @@ The alerter requires the following options:
 
 ``snow_password``: The ServiceNow password to access the api. This option allows the rule to override the buffer_time global setting defined in config.yaml.
 
-``short_description``: The ServiceNow password to access the api. This option allows the rule to override the buffer_time global setting defined in config.yaml.
-
 Optional:
+
+``short_description``: The ServiceNow Short Description of the incident.
 
 ``comments``: Comments to be attached to the incident, this is the equivilant of work notes.
 
